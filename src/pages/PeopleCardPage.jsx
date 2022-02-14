@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { getPeopleById } from '../api'
+import { getPeopleById } from 'api'
 import { Button } from 'react-bootstrap'
-import { Preloader } from '../components/Preloader'
+import { Preloader } from 'components/Preloader'
 
 const PeopleCardPage = () => {
     const navigate = useNavigate()

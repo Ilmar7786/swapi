@@ -21,7 +21,8 @@ const Search = () => {
         setValue(e.target.value)
     }
 
-    const onSubmitSearch = () => {
+    const onSubmitSearch = e => {
+        e.preventDefault()
         if (value) {
             setLoading(true)
             setIsActive(true)
@@ -38,20 +39,18 @@ const Search = () => {
     }
 
     return (
-        <div className='my-2 my-lg-0 d-flex'>
-            <input
-                className='form-control mr-sm-2'
-                type='search'
-                placeholder='Search'
-                aria-label='Search'
-                onChange={onChangeSearch}
-                value={value}
-            />
-            <button
-                className='btn btn-outline-success my-2 my-sm-0'
-                onClick={onSubmitSearch}
-            >Search
-            </button>
+        <div className='my-2 my-lg-0'>
+                <form onClick={onSubmitSearch} className='d-flex'>
+                <input
+                    className='form-control mr-sm-2'
+                    type='search'
+                    placeholder='Search'
+                    aria-label='Search'
+                    onChange={onChangeSearch}
+                    value={value}
+                />
+                <button className='btn btn-outline-success my-2 my-sm-0' >Search</button>
+            </form>
             <div
                 className={style.searchResult}
                 style={{display: isActive ? 'flex' : 'none'}}

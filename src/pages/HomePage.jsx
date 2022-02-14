@@ -1,35 +1,17 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { getAllPeople } from '../api'
+import React, { useState } from 'react'
 import { PeopleList } from 'components/peopleList'
-import { CustomContext } from 'store/context'
-import { Preloader } from 'components/Preloader';
 
 
 const HomePage = () => {
-    const [loading, setLoading] = useState(false)
-    const {peoples, addPeoples} = useContext(CustomContext)
-
-    useEffect(() => {
-        if (!peoples.length) {
-            setLoading(true)
-            getAllPeople().then(data => {
-                addPeoples(data.results)
-                setLoading(false)
-            })
-        }
-    }, [])
-
-    if (loading) return <Preloader/>
+    const [history] = useState(JSON.parse(sessionStorage.getItem('browsingHistory')) ?? [])
 
     return (
-        <>
-            <h1>The Star Wars</h1>
-            {peoples.length
-                ? <PeopleList peoples={peoples}/>
-                : <p>The list is empty</p>
-            }
+        <div>
+            <h1 className='text-center m-3'>The Star Wars </h1>
+            <p className='fs-3'>History</p>
 
-        </>
+            <PeopleList peoples={history}/>
+        </div>
     )
 }
 
